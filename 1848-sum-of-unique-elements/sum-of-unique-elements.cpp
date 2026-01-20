@@ -1,22 +1,21 @@
 class Solution {
 public:
     int sumOfUnique(vector<int>& nums) {
-        unordered_set<int> seen;
-        unordered_set<int> duplicate;
 
-        for (int& x : nums) {
-            if (seen.count(x) == duplicate.count(x)) {
-                seen.insert(x);
+        int sum = 0;
+        unordered_map<int, int> mp;
+        // frequency count...
+        for (int& num : nums) {
+            mp[num]++;
+        }
 
-            } else if (seen.count(x)) {
-                seen.erase(x);
-                duplicate.insert(x);
+        // add only unique elements.
+        for (auto& it : mp) {
+            if(it.second == 1) {
+                sum += it.first;
             }
         }
-        int sum = 0;
-        for (int x : seen) {
-            sum += x;
-        }
+
         return sum;
     }
 };
